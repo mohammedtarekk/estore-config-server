@@ -7,3 +7,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+      
+
+inventory:
+  mode: 0
