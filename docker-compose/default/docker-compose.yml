@@ -2,19 +2,19 @@ version: "3.8"
 
 services:
 
-  ConfigServer:
+  configserver:
     image: estore/configserver:latest
     mem_limit: 700m
     ports:
-      - "8071:8071"
+      - "8071:8080"
     networks:
      - me
       
-  Payment:
+  payment:
     image: estore/payment:latest
     mem_limit: 700m
     ports:
-      - "8080:8080"
+      - "8072:8083"
     networks:
       - me
     depends_on:
@@ -27,13 +27,13 @@ services:
         window: 120s
     environment:
       SPRING_PROFILES_ACTIVE: default
-      SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
+      SPRING_CONFIG_IMPORT: optional:configserver:http://configserver:8071/
   
-  Inventory:
+  inventory:
     image: estore/inventory:latest
     mem_limit: 700m
     ports:
-      - "8090:8090"
+      - "8073:8081"
     networks:
       - me
     depends_on:
@@ -46,7 +46,7 @@ services:
         window: 120s
     environment:
       SPRING_PROFILES_ACTIVE: default
-      SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
+      SPRING_CONFIG_IMPORT: optional:configserver:http://configserver:8071/
     
 networks:
   me:
