@@ -9,7 +9,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/payment
     username: postgres
-    password: admin
+    password: {cipher}293996a59cb92ec86a5191de2202dbd19865b45d382e9e9ff957de5f0059f723
 
   jpa:
     properties:
