@@ -10,7 +10,7 @@ spring:
       
 
 inventory:
-  mode: 0
+  mode: 10
 
 eureka:
   instance:
