@@ -9,6 +9,8 @@ services:
       - "8071:8080"
     networks:
      - me
+    environment: 
+      SERVER_PORT: 8080
       
   payment:
     image: estore/payment:latest
@@ -25,7 +27,8 @@ services:
         delay: 5s
         max_attempts: 3
         window: 120s
-    environment:
+    environment: 
+      SERVER_PORT: 8083
       SPRING_PROFILES_ACTIVE: default
       SPRING_CONFIG_IMPORT: optional:configserver:http://configserver:8071/
   
@@ -45,6 +48,7 @@ services:
         max_attempts: 3
         window: 120s
     environment:
+      SERVER_PORT: 8081
       SPRING_PROFILES_ACTIVE: default
       SPRING_CONFIG_IMPORT: optional:configserver:http://configserver:8071/
     
