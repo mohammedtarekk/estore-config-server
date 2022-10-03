@@ -1,16 +1,6 @@
-#server:
- # port: 8082
-
 spring:
   application:
     name: payment
-  profiles:
-    active: dev
-  datasource:
-    url: jdbc:postgresql://localhost:5432/payment
-    username: postgres
-    password: admin
-
   jpa:
     properties:
       hibernate:
@@ -23,3 +13,13 @@ management:
     web:
       exposure:
         include: "*"
+  info:
+    env:
+      enabled: true
+
+# configure info endpoint (actuator)
+info:
+   app:
+     name: Payment
+     description: It will manage payments
+     version: 1.0
