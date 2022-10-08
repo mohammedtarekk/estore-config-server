@@ -3,20 +3,22 @@ version: "3.8"
 services:
 
   configserver:
-    image: eazybytes/configserver:latest
-    mem_limit: 700m
-    ports:
-      - "8071:8071"
-    networks:
-     - eazybank
-      
-  accounts:
-    image: eazybytes/accounts:latest
+    image: estore/configserver:latest
     mem_limit: 700m
     ports:
       - "8080:8080"
     networks:
-      - eazybank
+     - me
+    environment: 
+      SERVER_PORT: 8080
+      
+  eurekaserver:
+    image: estore/eurekaserver:latest
+    mem_limit: 700m
+    ports:
+      - "8081:8081"
+    networks:
+     - me
     depends_on:
       - configserver
     deploy:
@@ -25,17 +27,38 @@ services:
         delay: 5s
         max_attempts: 3
         window: 120s
-    environment:
+    environment: 
+      SERVER_PORT: 8081
+      SPRING_CONFIG_IMPORT: optional:configserver:http://configserver:8080/
+      
+  payment:
+    image: estore/payment:latest
+    mem_limit: 700m
+    ports:
+      - "8082:8082"
+    networks:
+      - me
+    depends_on:
+      - configserver
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment: 
+      SERVER_PORT: 8082
       SPRING_PROFILES_ACTIVE: dev
-      SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
+      SPRING_CONFIG_IMPORT: optional:configserver:http://configserver:8080/
+      EUREKA_CLIENT_SERVICE-URL_DEFALUTZONE: http://localhost:8081/eureka/
   
-  loans:
-    image: eazybytes/loans:latest
+  inventory:
+    image: estore/inventory:latest
     mem_limit: 700m
     ports:
-      - "8090:8090"
+      - "8083:8083"
     networks:
-      - eazybank
+      - me
     depends_on:
       - configserver
     deploy:
@@ -45,27 +68,10 @@ services:
         max_attempts: 3
         window: 120s
     environment:
+      SERVER_PORT: 8083
       SPRING_PROFILES_ACTIVE: dev
-      SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
-    
-  cards:
-    image: eazybytes/cards:latest
-    mem_limit: 700m
-    ports:
-      - "9000:9000"
-    networks:
-      - eazybank
-    depends_on:
-      - configserver
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
-    environment:
-      SPRING_PROFILES_ACTIVE: dev
-      SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
+      SPRING_CONFIG_IMPORT: optional:configserver:http://configserver:8080/
+      EUREKA_CLIENT_SERVICE-URL_DEFALUTZONE: http://localhost:8081/eureka/
       
 networks:
-  eazybank:
+  me:
