@@ -1,5 +1,5 @@
-#server:
-#  port: 8081
+server:
+  port: 8083
 
 spring:
   datasource:
@@ -18,7 +18,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://localhost:8070/eureka/
+      defaultZone: http://localhost:8081/eureka/
 
 # APP-SPECIFIC CONFIG
 inventory:
