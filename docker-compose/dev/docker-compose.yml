@@ -29,7 +29,7 @@ services:
         window: 120s
     environment: 
       SERVER_PORT: 8081
-      SPRING_CONFIG_IMPORT: optional:configserver:http://configserver:8080/
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:8080/
       
   payment:
     image: estore/payment:latest
@@ -49,8 +49,8 @@ services:
     environment: 
       SERVER_PORT: 8082
       SPRING_PROFILES_ACTIVE: dev
-      SPRING_CONFIG_IMPORT: optional:configserver:http://configserver:8080/
-      EUREKA_CLIENT_SERVICE-URL_DEFALUTZONE: http://localhost:8081/eureka/
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:8080/
+      EUREKA_CLIENT_SERVICEURL_DEFALUTZONE: http://localhost:8081/eureka/
   
   inventory:
     image: estore/inventory:latest
@@ -70,8 +70,8 @@ services:
     environment:
       SERVER_PORT: 8083
       SPRING_PROFILES_ACTIVE: dev
-      SPRING_CONFIG_IMPORT: optional:configserver:http://configserver:8080/
-      EUREKA_CLIENT_SERVICE-URL_DEFALUTZONE: http://localhost:8081/eureka/
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:8080/
+      EUREKA_CLIENT_SERVICEURL_DEFALUTZONE: http://localhost:8081/eureka/
       
 networks:
   me:
