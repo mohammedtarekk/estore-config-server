@@ -23,8 +23,6 @@ eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
-    service-url:
-      defaultZone: http://eurekaserver:8081/eureka/
 
 # configure info endpoint (actuator)
 info:
