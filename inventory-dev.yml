@@ -5,7 +5,8 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/inventory
     username: postgres
-    password: '{cipher}293996a59cb92ec86a5191de2202dbd19865b45d382e9e9ff957de5f0059f723'
+#    password: '{cipher}293996a59cb92ec86a5191de2202dbd19865b45d382e9e9ff957de5f0059f723'
+    password: admin
 
   jpa:
     hibernate:
