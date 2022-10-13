@@ -25,7 +25,7 @@ eureka:
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://localhost:8081/eureka/
+      defaultZone: http://host.docker.internal:8081/eureka/
 
 # configure info endpoint (actuator)
 info:
