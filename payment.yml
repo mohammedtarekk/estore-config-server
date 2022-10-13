@@ -20,15 +20,6 @@ management:
     env:
       enabled: true
 
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      default-zone: http://localhost:8081/eureka/
-
 # configure info endpoint (actuator)
 info:
    app:
