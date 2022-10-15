@@ -20,12 +20,12 @@ management:
     env:
       enabled: true
 
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8081/eureka/
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8081/eureka/
 
 # configure info endpoint (actuator)
 info:
